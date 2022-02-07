@@ -2,6 +2,7 @@
 namespace JimLind\Helpers;
 
 use GuzzleHttp\Client;
+use JimLind\Factories\AddressFactory;
 use JimLind\Models\Address;
 
 class ApiHelper
@@ -12,11 +13,13 @@ class ApiHelper
     const STATUS_SUSPECT = 'SUSPECT';
     const STATUS_INVALID = 'INVALID';
 
+    private $addressFactory = null;
     private $apiKey = '';
     private $guzzleClient = null;
 
-    public function __construct(string $apiKey, Client $guzzleClient)
+    public function __construct(AddressFactory $addressFactory, string $apiKey, Client $guzzleClient)
     {
+        $this->addressFactory = $addressFactory;
         $this->apiKey = $apiKey;
         $this->guzzleClient = $guzzleClient;
     }
@@ -50,7 +53,7 @@ class ApiHelper
             return $originalAddress;
         }
 
-        $newAddress = new Address($jsonResponse->addressline1, $jsonResponse->city, $jsonResponse->postalcode);
+        $newAddress = $this->addressFactory->build($jsonResponse->addressline1, $jsonResponse->city, $jsonResponse->postalcode);
         switch ($jsonResponse->status) {
             case self::STATUS_VALID:
             case self::STATUS_SUSPECT:

@@ -4,6 +4,7 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Response;
+use JimLind\Factories\AddressFactory;
 use JimLind\Helpers\ApiHelper;
 use JimLind\Models\Address;
 use PHPUnit\Framework\TestCase;
@@ -15,7 +16,7 @@ class ApiHelperTest extends TestCase
         $handlerStack = HandlerStack::create($mock);
         $client = new Client(['handler' => $handlerStack]);
 
-        $apiHelper = new ApiHelper(uniqid(), $client);
+        $apiHelper = new ApiHelper($this->getAddressFactory(), uniqid(), $client);
         $inputAddressList = [$this->createMock(Address::class)];
         $outputAddressList = $apiHelper->validateAddressList($inputAddressList);
 
@@ -30,7 +31,7 @@ class ApiHelperTest extends TestCase
         $handlerStack = HandlerStack::create($mock);
         $client = new Client(['handler' => $handlerStack]);
 
-        $apiHelper = new ApiHelper(uniqid(), $client);
+        $apiHelper = new ApiHelper($this->getAddressFactory(), uniqid(), $client);
         $inputAddressList = [$this->createMock(Address::class)];
         $outputAddressList = $apiHelper->validateAddressList($inputAddressList);
         
@@ -44,7 +45,7 @@ class ApiHelperTest extends TestCase
         $handlerStack = HandlerStack::create($mock);
         $client = new Client(['handler' => $handlerStack]);
 
-        $apiHelper = new ApiHelper(uniqid(), $client);
+        $apiHelper = new ApiHelper($this->getAddressFactory(), uniqid(), $client);
         $inputAddressList = [$this->createMock(Address::class)];
         $outputAddressList = $apiHelper->validateAddressList($inputAddressList);
         
@@ -61,7 +62,7 @@ class ApiHelperTest extends TestCase
         $handlerStack = HandlerStack::create($mock);
         $client = new Client(['handler' => $handlerStack]);
 
-        $apiHelper = new ApiHelper(uniqid(), $client);
+        $apiHelper = new ApiHelper($this->getAddressFactory(), uniqid(), $client);
         $inputAddressList = [$this->createMock(Address::class)];
         $outputAddressList = $apiHelper->validateAddressList($inputAddressList);
         
@@ -70,5 +71,10 @@ class ApiHelperTest extends TestCase
         $this->assertEquals($outputAddressList[0]->getStreetAddress(), '123 E Main St');
         $this->assertEquals($outputAddressList[0]->getCity(), 'Columbus');
         $this->assertEquals($outputAddressList[0]->getPostalCode(), '43215-5207');
+    }
+
+    private function getAddressFactory() {
+        // TODO: AddressFactory doesn't do much (by design) but would make sense to mock this.
+        return new AddressFactory();
     }
 }
