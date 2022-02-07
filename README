@@ -1,0 +1,3 @@
+
+
+php src/Application.php validation --file 'data/input.txt'

@@ -1,0 +1,19 @@
+imports:
+    - { resource: parameters.yaml }
+
+services:
+    _defaults:
+        autowire: true
+
+    JimLind\:
+        resource: "../src/*"
+
+    JimLind\Application:
+        public: true
+
+    JimLind\Helpers\ApiHelper:
+        arguments:
+            $apiKey: "%app.api_key%"
+
+    GuzzleHttp\Client:
+        autowire: true
