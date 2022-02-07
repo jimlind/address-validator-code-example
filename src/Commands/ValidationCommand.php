@@ -39,12 +39,7 @@ class ValidationCommand extends Command
         $rawAddressList = array_map('self::translateToAddressModel', $parsedAddressData);
         $verifiedAddressList = $this->apiHelper->validateAddressList($rawAddressList);
 
-        // var_dump($rawAddressList);
-        // var_dump($formattedAddressList);
-
         $this->outputHelper->writeResults($output, $rawAddressList, $verifiedAddressList);
-
-        //$output->writeln('My work here is done.');
 
         return Command::SUCCESS;
     }
