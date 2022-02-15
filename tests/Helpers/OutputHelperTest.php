@@ -2,6 +2,7 @@
 
 use JimLind\Helpers\OutputHelper;
 use JimLind\Models\Address;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Output\ConsoleOutput;
 
@@ -21,6 +22,7 @@ class OutputHelperTest extends TestCase
         $verifiedAddress->setStatus(Address::VALID);
 
         $outputString = "$originalStreetAddress, $originalCity, $originalPostalCode -> $verifiedStreetAddress, $verifiedCity, $verifiedPostalCode";
+        /** @var ConsoleOutput&MockObject */
         $output = $this->createMock(ConsoleOutput::class);
         $output->expects($this->once())
             ->method('writeln')
@@ -41,6 +43,7 @@ class OutputHelperTest extends TestCase
         $verifiedAddress->setStatus(Address::INVALID);
 
         $outputString = "$originalStreetAddress, $originalCity, $originalPostalCode -> Invalid Address";
+        /** @var ConsoleOutput&MockObject */
         $output = $this->createMock(ConsoleOutput::class);
         $output->expects($this->once())
             ->method('writeln')
