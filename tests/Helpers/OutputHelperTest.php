@@ -1,9 +1,5 @@
 <?php
 
-use GuzzleHttp\Client;
-use GuzzleHttp\Handler\MockHandler;
-use GuzzleHttp\HandlerStack;
-use GuzzleHttp\Psr7\Response;
 use JimLind\Helpers\OutputHelper;
 use JimLind\Models\Address;
 use PHPUnit\Framework\TestCase;
@@ -11,7 +7,8 @@ use Symfony\Component\Console\Output\ConsoleOutput;
 
 class OutputHelperTest extends TestCase
 {
-    public function testValidAddress():void {
+    public function testValidAddress(): void
+    {
         $originalStreetAddress = uniqid();
         $originalCity = uniqid();
         $originalPostalCode = uniqid();
@@ -33,7 +30,8 @@ class OutputHelperTest extends TestCase
         $outputHelper->writeResults($output, [$originalAddress], [$verifiedAddress]);
     }
 
-    public function testInvalidAddress():void {
+    public function testInvalidAddress(): void
+    {
         $originalStreetAddress = uniqid();
         $originalCity = uniqid();
         $originalPostalCode = uniqid();
