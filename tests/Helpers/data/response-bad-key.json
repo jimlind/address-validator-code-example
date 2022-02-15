@@ -1,1 +1,6 @@
-{ "status": "API_KEY_INVALID_OR_DEPLETED", "ratelimit_remain": 0, "ratelimit_seconds": 1, "cost": 0.0 }
+{
+    "status": "API_KEY_INVALID_OR_DEPLETED",
+    "ratelimit_remain": 0,
+    "ratelimit_seconds": 1,
+    "cost": 0.0
+}
